@@ -3,3 +3,6 @@ Keyboard
 Laptop
 Microphone
 Клавиатура
+Флаг
+Флаг
+Bag
