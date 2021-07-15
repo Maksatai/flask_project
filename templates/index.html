@@ -11,7 +11,7 @@
     <form action="/add/" method="POST">
         <input type="text" name="author" placeholder="Автор">
         <input type="text" name="descrip" placeholder="Название книги">
-        <input type="number" name="year" placeholder="год издания">
+        <input type="text" name="year" placeholder="год издания">
         <button>Добавить</button>
         <br>
         <br>
@@ -21,15 +21,14 @@
     {% for j in exc %}
         <td><b></color>{{ j }}</b></td>
     {% endfor %}
-    
-    {% for i in range(3) %}
+    {% for i in range(count) %}
     <tr>
         {% for i in excel_f[i] %}
-            <td>{{ i }}</td>
+                <td>{{ i }}</td>
         {% endfor %}
     </tr>
     {% endfor %}
-    </tr>
+
 </table>
 
 </body>
