@@ -17,19 +17,13 @@
         <br>
     </form>
 <table>
-    <tr>
-    {% for j in exc %}
-        <td><b></color>{{ j }}</b></td>
+    {% for book in books %}
+        <tr>
+            <td><b>{{ book.id }}</b>&nbsp&nbsp{{ book.author }}</td>
+            <td>&nbsp{{ book.descrip }}</td>
+            <td>&nbsp{{ book.year }}</td>
+        </tr>
     {% endfor %}
-    {% for i in range(count) %}
-    <tr>
-        {% for i in excel_f[i] %}
-                <td>{{ i }}</td>
-        {% endfor %}
-    </tr>
-    {% endfor %}
-
 </table>
-
 </body>
 </html>

@@ -1,27 +1,22 @@
 from flask import Flask, render_template, request
-from flask.wrappers import Request
-import pandas as pd
-from openpyxl import Workbook
-from openpyxl import load_workbook
+from database import Books, engine
+from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__)
+DBSession = sessionmaker(engine)
+session = DBSession()
 
 @app.route('/')
 def homepage():
-    excel_data_df = pd.read_excel(r'report.xlsx', engine='openpyxl')
+    book = session.query(Books).all()
 
-    return render_template('index.html',excel_f=excel_data_df.values, exc=excel_data_df,count=ws.max_row)
+    return render_template('index.html',books = book)
     
-outwb = load_workbook('report.xlsx')
-ws = outwb.active
 @app.route('/add/', methods=["POST"])
 def add():
-    author = request.form["author"]
-    descrip = request.form["descrip"]
-    year = request.form["year"]
-    ws.append([author,descrip,year])
-    outwb.save(filename='report.xlsx')
-    outwb.close()
+    a_object = Books(author = request.form["author"], descrip = request.form["descrip"], year = request.form["year"])
+    session.add(a_object)
+    session.commit()
     return """
         <h1>Архив добавлен</h1>
         <a href='/'>Домой</a>
